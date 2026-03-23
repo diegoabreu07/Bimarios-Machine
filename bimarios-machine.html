@@ -1,0 +1,121 @@
+<!-- Criado por Marise Miranda | 2017.1 -->
+<!-- Adaptado por Matheus Matos | 2025.1 -->
+<!-- Adaptado por Diego Abreu | 2026.1 -->
+
+<!DOCTYPE html>
+<html lang="pt-br">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Bimario's Machine</title>
+    <link rel="stylesheet" href="style.css">
+</head>
+
+<body onload="tocarMusica()">
+    <center>
+        <div id="modal" class="modal">
+            <div class="modal-content">
+                <h2>Bem Vindo!</h2> <br>
+                <button onclick="fecharModal()">Entrar</button>
+            </div>
+        </div>
+
+        <audio id="idMusica" loop>
+            <source src="musica.mp3" type="audio/mpeg">
+        </audio>
+
+        <audio id="idMusica2">
+            <source src="moeda.mp3" type="audio/mpeg">
+        </audio>
+
+
+        <!-- <audio autoplay loop src="/musica.mp3"></audio>  -->
+        <div class="container">
+            <h1>Bimario's Machine</h1>
+
+            <h3>Digite um número que deseja converter:</h3> <input id="numeroRecebido" type="text" placeholder="Ex: 42">
+            <br><br>
+
+            <select id="slt_base">
+                <option disabled selected value="">Selecione a base...</option>
+                <option value="10">Decimal</option>
+                <option value="16">Hexadecimal</option>
+                <option value="8">Octal</option>
+                <option value="2">Binário</option>
+            </select>
+
+            <button onclick="converter()">Converter</button>
+
+            <h3>Resultados:</h3>
+            <p> Decimal:
+            <div id="decimal"></div>
+            </p>
+            <p> Octal:
+            <div id="octal"></div>
+            </p>
+            <p> Hexadecimal:
+            <div id="hexa"></div>
+            </p>
+            <p> Binário:
+            <div id="bin"></div>
+            </p>
+        </div>
+    </center>
+
+    <script>
+        window.onload = function () {
+            document.getElementById("modal").style.display = "flex"
+        }
+
+        function fecharModal() {
+            document.getElementById("modal").style.display = "none"
+            const musica = document.getElementById("idMusica");
+            musica.volume = 0.25
+            musica.play()
+        }
+
+
+        function converter() {
+
+            let numero = numeroRecebido.value;
+            let base = slt_base.value
+            if (numero) {
+
+
+                const moeda = document.getElementById("idMusica2");
+                moeda.volume = 0.05
+                moeda.play()
+
+                if (base == 10) {
+                    numero = Number(numero)
+                    decimal.innerHTML = numero;
+                    octal.innerHTML = numero.toString(8);
+                    hexa.innerHTML = numero.toString(16).toUpperCase();
+                    bin.innerHTML = numero.toString(2);
+                } else if (base == 16) {
+                    decimal.innerHTML = parseInt(numero, 16);
+                    octal.innerHTML = parseInt(numero, 16).toString(8);
+                    hexa.innerHTML = numero.toUpperCase();
+                    bin.innerHTML = parseInt(numero, 16).toString(2);
+                } else if (base == 8) {
+                    numero = Number(numero)
+                    decimal.innerHTML = parseInt(numero, 8);
+                    octal.innerHTML = numero;
+                    hexa.innerHTML = parseInt(numero, 8).toString(16).toUpperCase();
+                    bin.innerHTML = parseInt(numero, 8).toString(2);
+                } else if (base == 2) {
+                    numero = Number(numero)
+                    decimal.innerHTML = parseInt(numero, 2);
+                    octal.innerHTML = parseInt(numero, 2).toString(8);
+                    hexa.innerHTML = parseInt(numero, 2).toString(16).toUpperCase();
+                    bin.innerHTML = numero
+                } else {
+                    alert("Erro! Selecione uma base")
+                }
+            }
+        }
+    </script>
+</body>
+
+</html>
